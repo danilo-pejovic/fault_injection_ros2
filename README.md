@@ -2,9 +2,10 @@
 Ros injection tool that subscribes to a topic and makes chenges to it according to preset behavior
 
 Setting up procedure
+
 As it stands this tool works with ROS2 Humble, planned to port on ROS Melodic in near future. 
 
-1.`mkdir -p ws/src`
+1. `mkdir -p ws/src` 
 2. `cd ws/src`
 3. `git clone https://github.com/danilo-pejovic/fault_injection_ros2`
 4. `cd ..`
