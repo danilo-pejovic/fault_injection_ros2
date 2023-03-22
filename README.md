@@ -5,13 +5,14 @@ Setting up procedure
 As it stands this tool works with ROS2 Humble, planned to port on ROS Melodic in near future. 
 
 mkdir -p ws/src
-cd ws/src
-git clone https://github.com/danilo-pejovic/fault_injection_ros2
-cd ..
-rosdep install --from-paths src --ignore-src -r -y
-source /opt/ros/humble/setup.bash
-MAKEFLAGS="-j1 -l1" colcon build
-source install/setup.bash
+
+1. `cd ws/src`
+2. `git clone https://github.com/danilo-pejovic/fault_injection_ros2`
+3. `cd ..`
+4. `rosdep install --from-paths src --ignore-src -r -y`
+5. `source /opt/ros/humble/setup.bash`
+6. `MAKEFLAGS="-j1 -l1" colcon build`
+7. `source install/setup.bash`
 
 Known limitations: 
 
