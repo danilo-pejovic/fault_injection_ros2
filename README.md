@@ -12,11 +12,15 @@ We need to clone couple of packages in order to get everything to work. You can 
 4. `git clone https://github.com/autowarefoundation/autoware_ai_simulation`
 5. `git clone https://github.com/carla-simulator/carla-autoware.git`
 6. `git clone https://github.com/carla-simulator/ros-bridge.git`
+As an example if we need to change ackermann control we need to change topic [in this line](https://github.com/carla-simulator/ros-bridge/blob/e9063d97ff5a724f76adbb1b852dc71da1dcfeec/carla_ackermann_control/src/carla_ackermann_control/carla_ackermann_control_node.py#L154) to a topic that is output of out mux launchfile - so far very creatively named muxed_topic.
 7. `cd ..`
 8. `rosdep install --from-paths src --ignore-src -r -y`
 9. `source /opt/ros/humble/setup.bash`
 10. `MAKEFLAGS="-j1 -l1" colcon build`
 11. `source install/setup.bash`
+
+TODO: testing (no testing done so far) and automatically  triggering
+
 
 After that one of the launch files like: 
  
