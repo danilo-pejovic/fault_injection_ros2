@@ -1,0 +1,20 @@
+<launch>
+  <!-- Define the input topics -->
+  <arg name="topic1" default="/carla/vehicle_control_cmd_manual_override"/>
+  <arg name="topic2" default="/carla/vehicle_control_cmd"/>
+
+  <!-- Define the output topic -->
+  <arg name="output_topic" default="/muxed_topic"/>
+
+  <!-- Start the topic mux node -->
+  <node name="topic_mux" pkg="topic_tools" type="mux" respawn="false" output="screen">
+    <param name="in_topic1" type="string" value="$(arg topic1)"/>
+    <param name="in_topic2" type="string" value="$(arg topic2)"/>
+    <param name="out_topic" type="string" value="$(arg output_topic)"/>
+  </node>
+
+  <!-- Start the carla agent node -->
+  <node name="carla_agent" pkg="carla_autoware_bridge" type="carla_agent" respawn="false" output="screen">
+    <param name="control_cmd_topic" type="string" value="$(arg output_topic)"/>
+  </node>
+</launch>
