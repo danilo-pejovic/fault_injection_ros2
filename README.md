@@ -11,11 +11,12 @@ We need to clone couple of packages in order to get everything to work. You can 
 3. `git clone https://github.com/danilo-pejovic/fault_injection_ros2`
 4. `git clone https://github.com/autowarefoundation/autoware_ai_simulation`
 5. `git clone https://github.com/carla-simulator/carla-autoware.git`
-5. `cd ..`
-5. `rosdep install --from-paths src --ignore-src -r -y`
-6. `source /opt/ros/humble/setup.bash`
-7. `MAKEFLAGS="-j1 -l1" colcon build`
-8. `source install/setup.bash`
+6. `git clone https://github.com/carla-simulator/ros-bridge.git`
+7. `cd ..`
+8. `rosdep install --from-paths src --ignore-src -r -y`
+9. `source /opt/ros/humble/setup.bash`
+10. `MAKEFLAGS="-j1 -l1" colcon build`
+11. `source install/setup.bash`
 
 After that one of the launch files like: 
  
