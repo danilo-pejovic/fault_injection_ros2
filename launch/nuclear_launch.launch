@@ -1,0 +1,35 @@
+<launch>
+  <!-- Launch CARLA and Autoware -->
+  <include file="$(find carla_autoware_bridge)/launch/carla_autoware_bridge.launch" />
+
+  <!-- Create a topic multiplexer -->
+  <node pkg="topic_tools" type="mux" name="mux">
+    <remap from="input_1" to="/carla/vehicle/0/gnss/gnss1/fix" />
+    <remap from="input_2" to="/carla/vehicle/0/gnss/gnss1/velocity" />
+    <remap from="input_3" to="/carla/vehicle/0/imu" />
+    <remap from="input_4" to="/carla/vehicle/0/vehicle_info" />
+    <remap from="input_5" to="/mux/input_5" />
+    <remap from="input_6" to="/carla/vehicle/0/vehicle_status" />
+    <remap from="input_7" to="/carla/vehicle/0/lidar" />
+    <remap from="input_8" to="/carla/vehicle/0/camera/rgb/front/image_color" />
+    <remap from="input_9" to="/carla/vehicle/0/camera/rgb/front/image_color/compressed" />
+    <remap from="input_10" to="/carla/vehicle/0/camera/rgb/front/image_color/compressedDepth" />
+    <remap from="input_11" to="/carla/vehicle/0/camera/rgb/front/image_color/theora" />
+  </node>
+
+  <!-- Remap the Autoware topics to the mux -->
+  <remap from="/gnss/fix" to="/mux/input_1" />
+  <remap from="/gnss/velocity" to="/mux/input_2" />
+  <remap from="/imu/data_raw" to="/mux/input_3" />
+  <remap from="/vehicle_info" to="/mux/input_4" />
+  <remap from="/vehicle_status" to="/mux/input_6" />
+  <remap from="/points_raw" to="/mux/input_7" />
+  <remap from="/image_raw" to="/mux/input_8" />
+  <remap from="/image_raw/compressed" to="/mux/input_9" />
+  <remap from="/image_raw/compressedDepth" to="/mux/input_10" />
+  <remap from="/image_raw/theora" to="/mux/input_11" />
+
+  <!-- Node that modifies and republishes /carla/vehicle/0/odometry -->
+  <node pkg="rostopic" type="bw" name="odometry_modifier" output="screen" args="echo /carla/vehicle/0/odometry | sed 's/x: \([0-9.-]*\)/x: \1+2/' | rostopic pub -1 /mux/input_5 nav_msgs/Odometry -r 100" />
+
+</launch>
