@@ -20,7 +20,7 @@ As an example if we need to change ackermann control we need to change topic [in
 11. `source install/setup.bash`
 
 TODO: testing (no testing done so far) and automatically  triggering
-
+TODO: Create docker container for whole setup
 
 After that one of the launch files like: 
  
