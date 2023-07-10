@@ -1,0 +1,12 @@
+<launch>
+  <!-- Define the input topics -->
+  <arg name="topic1" default="/topic1"/>
+  <arg name="topic2" default="/topic2"/>
+
+  <!-- Define the output topic -->
+  <arg name="output_topic" default="/turtle1/cmd_vel"/>
+   <arg name="mux_name" default="test_mux"/>
+
+  <!-- Start the topic mux node -->
+  <node name="topic_mux" pkg="topic_tools" type="mux" respawn="false" output="screen" args="$(arg output_topic) $(arg topic1) $(arg topic2) mux:=$(arg mux_name)"/>
+</launch>
